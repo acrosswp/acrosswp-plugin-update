@@ -9,7 +9,7 @@
         "plugin"
     ],
     "autoload": {
-        "files": ["menu-license.php"]
+        "files": ["acrosswp-plugin-update.php"]
     },
     "support": {
         "issues": "https://github.com/acrosswp/acrosswp-plugin-update/issues"
