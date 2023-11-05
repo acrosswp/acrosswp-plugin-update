@@ -91,7 +91,7 @@ class AcrossWP_Plugin_Update {
 	 * @since AcrossWP Plugin Update 1.0.0
 	 */
 	function version_bump() {
-		update_option( $this->plugin_name_db_version, WORDPRESS_PLUGIN_BOILERPLATE_VERSION );
+		update_option( $this->plugin_name_db_version, $this->version );
 	}
 
 	/**
@@ -124,7 +124,7 @@ class AcrossWP_Plugin_Update {
 		$current_db = $this->get_db_version_raw();
 
 		// Get the raw database version.
-		$current_live = WORDPRESS_PLUGIN_BOILERPLATE_VERSION;
+		$current_live = $this->version;
 
 
 		$is_update = false;
@@ -155,13 +155,9 @@ class AcrossWP_Plugin_Update {
 		$current_db = $this->get_db_version_raw();
 
 		// Get the raw database version.
-		$current_live = WORDPRESS_PLUGIN_BOILERPLATE_VERSION;
+		$current_live = $this->version;
 
-		if ( version_compare( '1.0.0', $current_db ) ) {
-			wordpress_plugin_boilerplate_to_1_0_0();
-		}
-
-		do_action( 'acrosswp_plugin_update_' . $this->plugin_name, $current_db, $this );
+		do_action( 'acrosswp_plugin_update_' . $this->plugin_name, $this );
 
 		/**
 		 * Update the version
