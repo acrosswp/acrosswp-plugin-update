@@ -59,6 +59,7 @@ class AcrossWP_Plugin_Update {
 	public function __construct( $plugin_name, $version ) {
 
 		$this->plugin_name = $plugin_name;
+		$this->plugin_updating = '_' . $this->plugin_name . '_updating';
 		$this->plugin_name_db_version = '_' . $this->plugin_name . '_db_version';
 		$this->version = $version;
 	}
@@ -73,6 +74,16 @@ class AcrossWP_Plugin_Update {
 	 */
 	public function is_install() {
 		return ! $this->get_db_version_raw();
+	}
+
+	/**
+	 * Check if the plugin is still updating
+	 * 
+	 * @since AcrossWP Plugin Update 1.0.0
+	 */
+	public function is_plugin_updating() {
+
+		return (bool) apply_filters( 'acrosswp_plugin_updating_' . $this->plugin_name, get_option( $this->plugin_updating, false ) );
 	}
 
 
@@ -157,11 +168,14 @@ class AcrossWP_Plugin_Update {
 		// Get the raw database version.
 		$current_live = $this->version;
 
+
 		do_action( 'acrosswp_plugin_update_' . $this->plugin_name, $this );
 
 		/**
 		 * Update the version
 		 */
-		$this->version_bump();
+		if( empty( $this->is_plugin_updating() ) ) {
+			$this->version_bump();
+		}
 	}
 }
