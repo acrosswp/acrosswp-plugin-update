@@ -62,6 +62,9 @@ class AcrossWP_Plugin_Update {
 		$this->plugin_updating = '_' . $this->plugin_name . '_updating';
 		$this->plugin_name_db_version = '_' . $this->plugin_name . '_db_version';
 		$this->version = $version;
+
+
+		add_action( 'bp_admin_init', arrray( $this, 'setup_updater' ) );
 	}
 
 	/**
