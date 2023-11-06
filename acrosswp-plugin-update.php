@@ -67,6 +67,37 @@ class AcrossWP_Plugin_Update {
 		add_action( 'bp_admin_init', array( $this, 'setup_updater' ) );
 	}
 
+
+	/**
+	 * If the Update is running in the background then user this to stop the version update
+	 *
+	 * If the Update is running in the background then user this to stop the version update
+	 *
+	 * @return bool True if this is a fresh BP install, otherwise false.
+	 * @since AcrossWP Plugin Update 1.0.0
+	 */
+	public function update_is_running() {
+		
+		add_filter( 'acrosswp_plugin_updating_' . $this->plugin_name, '__return_true' );
+
+		update_option( $this->plugin_updating, true );
+	}
+
+	/**
+	 * If the update is completed then use this function
+	 *
+	 * If the update is completed then use this function
+	 *
+	 * @return bool True if this is a fresh BP install, otherwise false.
+	 * @since AcrossWP Plugin Update 1.0.0
+	 */
+	public function update_is_completed() {
+		
+		add_filter( 'acrosswp_plugin_updating_' . $this->plugin_name, '__return_false' );
+
+		update_option( $this->plugin_updating, false );
+	}
+
 	/**
 	 * Is this a fresh installation of AcrossWP Plugin Update?
 	 *
