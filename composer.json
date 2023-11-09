@@ -14,6 +14,9 @@
     "support": {
         "issues": "https://github.com/acrosswp/acrosswp-plugin-update/issues"
     },
+    "require": {
+        "yahnis-elsts/plugin-update-checker": "dev-master"
+    },
     "authors": [
         {
             "name": "acrosswp",
