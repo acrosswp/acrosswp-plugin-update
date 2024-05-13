@@ -66,7 +66,7 @@ if( ! class_exists( 'AcrossWP_Plugin_Update' ) ) {
 			$this->version = $version;
 
 
-			add_action( 'bp_admin_init', array( $this, 'setup_updater' ) );
+			add_action( 'init', array( $this, 'setup_updater' ) );
 		}
 
 
